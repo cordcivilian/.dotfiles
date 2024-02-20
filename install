@@ -1,0 +1,12 @@
+#!/bin/bash
+
+pushd $DOTFILES
+
+for directory in $(echo $STOW_FOLDERS | sed "s/,/ /g")
+do
+  echo "Stow $directory"
+  stow -D $directory
+  stow $directory
+done
+
+popd

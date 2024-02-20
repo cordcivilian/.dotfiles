@@ -1,0 +1,11 @@
+function ok { okular "$1" & }
+function here { dolphin . & }
+
+export PATH=~/.local/bin:usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/snap/bin
+export CHROME_EXECUTABLE='/snap/bin/chromium'
+
+alias bt='bluetoothctl'
+alias sc='vim ~/.bashrc_arch13'
+alias dl='cd ~/Downloads'
+alias db='cd ~/Dropbox'
+alias pj='cd ~/projects'
