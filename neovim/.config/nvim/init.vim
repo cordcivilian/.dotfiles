@@ -45,7 +45,6 @@ highlight ColorColumn ctermbg=238
 highlight Pmenu ctermfg=White ctermbg=238 cterm=None
 highlight FloatBorder ctermfg=White ctermbg=238 cterm=NONE
 
-
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
@@ -69,7 +68,7 @@ nnoremap <silent> <leader>x <cmd>!chmod +x %<CR>
 
 let DATA_DIR = $HOME . "/.local/share/nvim/site"
 if empty(glob(DATA_DIR. '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.DATA_DIR.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  silent execute '!curl -fLo '.DATA_DIR.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
 
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | source $MYVIMRC | endif
