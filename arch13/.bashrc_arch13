@@ -1,7 +1,7 @@
 function ok { okular "$1" & }
 function here { dolphin . & }
 
-export PATH=~/.local/bin:usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/snap/bin
+export PATH=~/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/snap/bin
 export CHROME_EXECUTABLE='/snap/bin/chromium'
 
 alias bt='bluetoothctl'
