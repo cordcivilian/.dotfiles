@@ -1,8 +1,5 @@
 " .vimrc
 
-" let g:python_recommended_style = 0
-" let g:polyglot_disabled = ['autoindent']
-
 set nocompatible
 set number
 set hidden
@@ -45,11 +42,11 @@ if !isdirectory($HOME."/.vim/undo")
     call mkdir($HOME."/.vim/undo", "", 0700)
 endif
 
-set backupdir=~/.vim/backup//
-set backup
 set directory=~/.vim/swap//
-set swapfile
+set backupdir=~/.vim/backup//
 set undodir=~/.vim/undo//
+set swapfile
+set backup
 set undofile
 
 autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter,FocusGained * call
@@ -72,7 +69,6 @@ call plug#begin()
     Plug 'mattn/vim-lsp-settings'
     Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'preservim/nerdtree'
