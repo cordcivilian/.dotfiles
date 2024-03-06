@@ -19,9 +19,6 @@ set backup
 
 set number
 set relativenumber
-set noruler
-set noshowmode
-set laststatus=0
 
 set expandtab
 set shiftwidth=4
@@ -39,7 +36,7 @@ set colorcolumn=80
 set scrolloff=8
 
 syntax on
-colorscheme slate 
+colorscheme slate
 highlight ColorColumn ctermbg=238
 
 if $TERM=='screen-256color' | set ttymouse=xterm2 | endif
@@ -73,44 +70,25 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | 
 
 call plug#begin()
     Plug 'sheerun/vim-polyglot'
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'mattn/vim-lsp-settings'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'ludovicchabant/vim-gutentags'
+    Plug 'dense-analysis/ale'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'preservim/nerdtree'
     Plug 'mbbill/undotree'
     Plug 'tpope/vim-fugitive'
+    Plug 'markonm/traces.vim'
 call plug#end()
 
-function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    setlocal signcolumn=yes
-    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <buffer> gd <plug>(lsp-definition)
-    nmap <buffer> gs <plug>(lsp-document-symbol-search)
-    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
-    nmap <buffer> gr <plug>(lsp-references)
-    nmap <buffer> gi <plug>(lsp-implementation)
-    nmap <buffer> gt <plug>(lsp-type-definition)
-    nmap <buffer> <leader>rn <plug>(lsp-rename)
-    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
-    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-    nmap <buffer> K <plug>(lsp-hover)
-    nnoremap <buffer> <expr><c-j> lsp#scroll(+4)
-    nnoremap <buffer> <expr><c-k> lsp#scroll(-4)
-    let g:lsp_diagnostics_virtual_text_enabled = 0
-    let g:lsp_format_sync_timeout = 1000
-    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
-endfunction
+set statusline+=%{gutentags#statusline()}
+set omnifunc=syntaxcomplete#Complete
+autocmd CompleteDone * pclose
 
-augroup lsp_install
-    au!
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-
-let g:lsp_diagnostics_float_cursor = 1
+let g:ale_linters = {'python': ['ruff']}
+let g:ale_fixers = {'python': ['ruff']}
+nmap <silent> [g :ALENext<CR>
+nmap <silent> ]g :ALEPrevious<CR>
+highlight link ALEVirtualTextError Error
 
 let NERDTreeShowLineNumbers = 1
 let g:undotree_SetFocusWhenToggle = 1

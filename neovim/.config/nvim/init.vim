@@ -37,7 +37,7 @@ set hlsearch
 set belloff=all
 set signcolumn=yes
 set colorcolumn=80
-set scrolloff=8
+set scrolloff=16
 
 syntax on
 colorscheme slate 
@@ -51,6 +51,7 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap J mzJ`z
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
+nnoremap <S-g> <S-g>zz
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
@@ -113,7 +114,7 @@ augroup lsp_install
 augroup END
 
 let g:lsp_diagnostics_float_cursor = 1
-let g:lsp_settings_filetype_python = ['pylsp-all', 'ruff-lsp']
+let g:lsp_settings_filetype_python = 'pylsp-all'
 
 let NERDTreeShowLineNumbers=1
 let g:undotree_SetFocusWhenToggle = 1
@@ -128,5 +129,4 @@ command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-hea
 nnoremap <leader>g :Git<CR>
 
 autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter,FocusGained * call system('tmux rename-window ' . expand('%:t'))
-autocmd VimLeave * silent call system('tmux rename-window bash')
-
+autocmd VimLeave * silent call jobstart(system('tmux rename-window bash'), {'detach': 1})
