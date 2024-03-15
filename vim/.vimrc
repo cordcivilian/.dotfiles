@@ -80,6 +80,7 @@ call plug#begin()
     Plug 'markonm/traces.vim'
 call plug#end()
 
+filetype plugin on
 set statusline+=%{gutentags#statusline()}
 set omnifunc=syntaxcomplete#Complete
 autocmd CompleteDone * pclose
